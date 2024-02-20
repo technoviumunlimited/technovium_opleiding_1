@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cprt6ai2eg8iy"
+path="res://.godot/imported/0_floor_links.obj-41a9104d576b1a9683632c8ea2618fb1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/0_floor_links.obj-41a9104d576b1a9683632c8ea2618fb1.mesh"]
+
+source_file="res://assets/technovium/lift/0_floor_links.obj"
+dest_files=["res://.godot/imported/0_floor_links.obj-41a9104d576b1a9683632c8ea2618fb1.mesh", "res://.godot/imported/0_floor_links.obj-41a9104d576b1a9683632c8ea2618fb1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

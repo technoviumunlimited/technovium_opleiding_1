@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dv0mhuik0i6t8"]
+
+[node name="elektrotechniek" type="Node2D"]
+position = Vector2(114, 66)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "ddddddd"
