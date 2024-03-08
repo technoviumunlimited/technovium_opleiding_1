@@ -4,8 +4,8 @@ extends CharacterBody3D
 @onready var ray_cast_3d = $head/Camera3D/RayCast3D
 @onready var label = $Control/Label
 @onready var lift_cabine = $"../elevator/lift_cabine"
-@onready var _0_floor_door_left = $"../lift/0_floor_door_left"
 @onready var player = $"."
+@onready var success = $"../technovium/audio/success"
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -17,6 +17,11 @@ var is_running = false
 var jump_count = 0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var elevator_position : float = 0.00
+@onready var lift_timer = $"../elevator/lift_cabine/lift_timer"
+@onready var teleporter_place = $"../Bijgebouw/teleporter_place"
+
+
+var _cabine_position
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -36,6 +41,8 @@ func _input(event):
 
 func _ready():
 	$crosshair.show()
+	lift_timer.start()
+	
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -60,17 +67,17 @@ func _physics_process(delta):
 		
 	var target = ray_cast_3d.get_collider()
 	label.hide()
-	var open_0_floor_door :bool = false
 	if target != null:
-		if target.is_in_group("0_floor_call_lift"):
-			var _0_floor_left_door = create_tween()
-			if open_0_floor_door == false:
-				_0_floor_left_door.tween_property(_0_floor_door_left, "rotation_degrees:y", -0.8, 1.0)
-				open_0_floor_door = true
+		print(target.name)
+		if target.is_in_group("teleporter"):
+			if target.name == "teleportertimmeren":
+				player.global_position = teleporter_place.global_transform.origin
+				
+		
 		# raycast education
 		if target.is_in_group("education_choise"):
 			label.show()
-			label.text = "Ontdek " + target.name + "!"
+			label.text = target.name + "!"
 			if Input.is_action_just_pressed("left_mouse_click"):
 				if target.name == "Technicus Engineering – Elektrotechniek":
 					elevator_position = 4.29
@@ -81,14 +88,24 @@ func _physics_process(delta):
 				if target.name == "Mediavormgever":
 					elevator_position = 13.49
 				if target.name == "Expert IT systems and devices":
-					elevator_position = 9.1
-				#print("interact")
-				#get_tree().paused = true
-				#get_tree().change_scene_to_file("res://elektrotechniek.tscn")
-				var _elektrotechniek = create_tween()
-				_elektrotechniek.tween_property(lift_cabine, "position:y", elevator_position, 1.0)
+					elevator_position = 9.05
+				if target.name == "Schilder":
+					elevator_position = 9.065
+				if target.name == "Timmeren":
+					elevator_position = 9.065
+					success.play()
+				if target.name == "Begane grond":
+					elevator_position = 0
+				_cabine_position_function(lift_cabine, elevator_position)
+				
 	#if Input.is_action_pressed("shoot"):
 		#shoot()
+		if target.is_in_group("photoUrl"):
+			label.show()
+			label.text = "Check onze website"
+			if Input.is_action_just_pressed("left_mouse_click"):
+				OS.shell_open("https://www.roc-nijmegen.nl/mbo-opleidingen/bouw-en-afbouw/timmeren-schilderen/gezel-schilder-01455o")
+					
 	move_and_slide()
 
 func shoot():
@@ -100,3 +117,11 @@ func shoot():
 			if target.is_in_group("lift_panel") && target.has_method("witch_floor"):
 				target.witch_floor(2)
 	
+
+func _cabine_position_function(lift_cabine, elevator_position):
+	_cabine_position = create_tween()
+	_cabine_position.tween_property(lift_cabine, "position:y", elevator_position, 2.0).set_trans(Tween.TRANS_LINEAR)
+
+func _on_lift_timer_timeout():
+	print("go back to the postion")
+	_cabine_position_function(lift_cabine, 0.0)
