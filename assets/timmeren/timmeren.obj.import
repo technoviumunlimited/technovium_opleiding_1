@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://7sld2a41mjms"
+path="res://.godot/imported/timmeren.obj-36ad131426e51054b3945c51be0a4264.mesh"
+
+[deps]
+
+files=["res://.godot/imported/timmeren.obj-36ad131426e51054b3945c51be0a4264.mesh"]
+
+source_file="res://assets/timmeren/timmeren.obj"
+dest_files=["res://.godot/imported/timmeren.obj-36ad131426e51054b3945c51be0a4264.mesh", "res://.godot/imported/timmeren.obj-36ad131426e51054b3945c51be0a4264.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
